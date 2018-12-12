@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="titulo">CRUD de Parcelas</ui:define>
+        <ui:define name="conteudo">
+            <h:form id="formListagem" prependId="false">
+                <p:growl/>
+                <p:messages/>
+
+                <div align="center"> 
+                    <p:defaultCommand target="filtrar"/>
+                    <p:panelGrid columns="11">
+                        <p:outputLabel value="Ordem: "/>
+                        <p:selectOneMenu id="ordem" value="#{controleParcela.dao.ordem}">
+                            <f:selectItem itemLabel="Venda" itemValue="parcelaID.venda.id"/>
+                            <f:selectItem itemLabel="Pessoa" itemValue="parcelaId.venda.pessoa.nome"/>
+                            <p:ajax update="listagem" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Filtro: "/>                        
+                        <p:inputText value="#{controleParcela.dao.filtro}">
+                            <p:ajax update="listagem" event="blur"/>
+                        </p:inputText>    
+
+                        <p:commandButton value="Filtrar" update="listagem" id="filtrar"
+                                         icon="ui-icon-search"/>
+                        <p:outputLabel value="Máximo de objetos:"/>
+                        <p:inputNumber value="#{controleParcela.dao.maximoObjetos}"
+                                       size="3"
+                                       thousandSeparator="" decimalSeparator=""
+                                       decimalPlaces="0">
+                            <p:ajax event="keyup" update="listagem"/>
+                        </p:inputNumber>
+                        <p:commandButton actionListener="#{controleParcela.dao.primeiro()}"
+                                         icon="ui-icon-seek-first" title="Primeiro"
+                                         update="listagem"/>
+                        <p:commandButton actionListener="#{controleParcela.dao.anterior()}"
+                                         icon="ui-icon-seek-prev" title="Anterior"
+                                         update="listagem"/>
+                        <p:commandButton actionListener="#{controleParcela.dao.proximo()}"
+                                         icon="ui-icon-seek-next" title="Próximo"
+                                         update="listagem"/>                        
+                        <p:commandButton actionListener="#{controleParcela.dao.ultimo()}"
+                                         icon="ui-icon-seek-end" title="Ultimo"
+                                         update="listagem"/>                        
+                    </p:panelGrid>     
+                    <p:panelGrid columns="6">
+                        <p:outputLabel value="Filtro no vencimento"/>
+                        <p:selectBooleanCheckbox value="#{controleParcela.dao.filtroVencimento}"/>
+                        <p:outputLabel value="Data Inicial:"/>
+                        <p:calendar value="#{controleParcela.dao.dataInicial}"                                    
+                                    pattern="dd/MM/yyyy" mask="true"
+                                    locale="pt_BR" navigator="true" size="8">
+                            <f:converter converterId="converterCalendar"/>
+                        </p:calendar> 
+                        <p:outputLabel value="Data Final:"/>
+                        <p:calendar value="#{controleParcela.dao.dataFinal}"                                    
+                                    pattern="dd/MM/yyyy" mask="true"
+                                    locale="pt_BR" navigator="true" size="8">
+                            <f:converter converterId="converterCalendar"/>
+                        </p:calendar>  
+                    </p:panelGrid>
+                </div>
+                <p:dataTable value="#{controleParcela.dao.listaObjetos}" var="obj" id="listagem"
+                             rowStyleClass="#{obj.vencida == true ? 'vencida' :  null}">
+                    <f:facet name="footer">
+                        <p:outputLabel value="#{controleParcela.dao.mensagemNavegacao}"/>
+                    </f:facet>
+                    <p:column headerText="Venda" style="text-align: center">
+                        <p:outputLabel value="#{obj.parcelaID.venda.id}"/>
+                    </p:column>                        
+                    <p:column headerText="Pessoa">
+                        <p:outputLabel value="#{obj.parcelaID.venda.pessoaFisica.nome}"/>
+                    </p:column>                           
+                    <p:column headerText="Numero" style="text-align: center">
+                        <p:outputLabel value="#{obj.parcelaID.numero}" />
+                    </p:column>            
+                    <p:column headerText="Valor">
+                        <p:outputLabel value="#{obj.valor}">
+                            <f:convertNumber pattern="R$ 0.00"/>
+                        </p:outputLabel>
+                    </p:column>         
+                    <p:column headerText="Vencimento" style="text-align: center">
+                        <p:outputLabel value="#{obj.vencimento}">
+                            <f:converter converterId="converterCalendar"/>
+                        </p:outputLabel>
+                    </p:column>
+                    <p:column headerText="Valor Pago">
+                        <p:outputLabel value="#{obj.valorPago}">
+                            <f:convertNumber pattern="R$ 0.00"/>
+                        </p:outputLabel>
+                    </p:column>  
+                    <p:column headerText="Data Pagamento" style="text-align: center">
+                        <p:outputLabel value="#{obj.dataPagamento}">
+                            <f:converter converterId="converterCalendar"/>
+                        </p:outputLabel>
+                    </p:column>                  
+                    <p:column headerText="Ações">
+                        <div align="center">
+                            <p:commandButton actionListener="#{controleParcela.editar(obj.parcelaID)}"
+                                             onclick="PF('dlg').show();"
+                                             update=":formPagamento" value="Pagar"
+                                             rendered="#{obj.valorPago == null and obj.dataPagamento == null}"/>                                                 
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+            <p:dialog header="Edição" widgetVar="dlg"
+                      resizable="false" modal="true"
+                      width="50%" height="100%" position="top">
+                <h:form id="formPagamento" prependId="false">
+                    <p:growl id="growl"/>
+                    <div align="center">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Cliente" />
+                            <p:inputText value="#{controleParcela.objeto.parcelaID.venda.pessoaFisica.nome}" 
+                                         readonly="true"/>                          
+                            <p:outputLabel value="Valor" /> 
+                            <p:inputNumber  value="#{controleParcela.objeto.valor}"
+                                            size="12" maxlength="12"
+                                            decimalPlaces="2" decimalSeparator="." thousandSeparator=""
+                                            readonly="true"/>                               
+                            <p:outputLabel value="Vencimento" />
+                            <p:inputText value="#{controleParcela.objeto.vencimento}" readonly="true">
+                                <f:converter converterId="converterCalendar"/>
+                            </p:inputText>                           
+                            <p:outputLabel value="Valor Pago" for="txtValorPago"/>                            
+                            <p:inputNumber id="txtValorPago" value="#{controleParcela.objeto.valorPago}"
+                                           size="12" maxlength="12"
+                                           decimalPlaces="2" decimalSeparator="." thousandSeparator=""/>                            
+                            <p:outputLabel value="Data Pagamento" for="txtDataPagamento"/>
+                            <p:calendar value="#{controleParcela.objeto.dataPagamento}"
+                                        id="txtDataPagamento"
+                                        pattern="dd/MM/yyyy" mask="true"
+                                        locale="pt_BR" navigator="true">
+                                <f:converter converterId="converterCalendar"/>
+                            </p:calendar>
+                        </p:panelGrid>
+                    </div>
+                    <p:panel>
+                        <div align="center">
+                            <p:commandButton value="Salvar Pagamento"
+                                             actionListener="#{controleParcela.salvarPagamento()}"
+                                             oncomplete="if (!args.validationFailed){PF('dlg').hide();}"
+                                             update=":formPagamento :formListagem"/>  
+                        </div>                                                        
+                    </p:panel>
+                    <ui:include src="/templates/ajaxstatus.xhtml"/>
+                </h:form>          
+            </p:dialog>
+        </ui:define>
+
+    </ui:composition>
+</html>
+

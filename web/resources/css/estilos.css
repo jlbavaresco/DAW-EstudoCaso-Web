@@ -10,3 +10,9 @@
 .ui-layout-north .ui-layout-unit-content {
     overflow:visible !important;
 }
+
+.vencida{
+    background-color: red !important;
+    background-image: none !important;
+    color: #000000 !important;
+}

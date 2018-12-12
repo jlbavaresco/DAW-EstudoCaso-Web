@@ -1,10 +1,10 @@
 package br.edu.ifsul.controle;
 
 import br.edu.ifsul.dao.VendaDAO;
-import br.edu.ifsul.dao.PaisDAO;
 import br.edu.ifsul.dao.PessoaFisicaDAO;
 import br.edu.ifsul.dao.ProdutoDAO;
 import br.edu.ifsul.dao.UsuarioDAO;
+import br.edu.ifsul.modelo.Parcela;
 import br.edu.ifsul.modelo.PessoaFisica;
 import br.edu.ifsul.modelo.Produto;
 import br.edu.ifsul.modelo.Usuario;
@@ -136,9 +136,21 @@ public class ControleVenda implements Serializable {
         objeto.setValorTotal(total);
     }  
     
-    public void gerarParcelas(){
-        objeto.gerarParcelas();
-        Util.mensagemInformacao("Parcelas geradas com sucesso!");
+    public void gerarParcelas(){        
+        Boolean temPagamento = false;
+        for (Parcela p : objeto.getParcelas()) {
+            if (p.getDataPagamento() != null || p.getValorPago() != null) {
+                temPagamento = true;
+            }
+        }
+        if (temPagamento) {
+            Util.mensagemErro("Parcelas não podem ser geradas novamente "
+                    + "por já existir pelo menos um pagamento");
+        } else {
+            objeto.getParcelas().clear();
+            objeto.gerarParcelas();
+            Util.mensagemInformacao("Parcelas Geradas com sucesso");
+        }        
     }
 
     public void imprimeRelatorio(Integer id) {

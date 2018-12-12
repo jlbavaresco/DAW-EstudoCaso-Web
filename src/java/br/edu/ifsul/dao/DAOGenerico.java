@@ -20,9 +20,9 @@ public class DAOGenerico<TIPO> {
     private String mensagem;
     protected String ordem = "id";
     protected String filtro = "";
-    private Integer maximoObjetos = 10;
-    private Integer posicaoAtual = 0;
-    private Integer totalObjetos = 0;
+    protected Integer maximoObjetos = 10;
+    protected Integer posicaoAtual = 0;
+    protected Integer totalObjetos = 0;
 
     public DAOGenerico() {
         em = EntityManagerUtil.getEntityManager();
