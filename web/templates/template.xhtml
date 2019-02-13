@@ -14,7 +14,7 @@
             <p:megaMenu>
                 <p:menuitem value="Início" url="/index.xhtml"
                             icon="ui-icon-home"/>
-                <p:submenu label="Cadastros">
+                <p:submenu label="Cadastros" rendered="#{controleLogin.usuarioLogado != null}">
                     <p:column>
                         <p:submenu label="Básicos">
                             <p:menuitem action="#{controlePais.listar()}"
@@ -29,7 +29,7 @@
                         </p:submenu>                               
                     </p:column>
                 </p:submenu>
-                <p:submenu label="Financeiro">
+                <p:submenu label="Financeiro" rendered="#{controleLogin.usuarioLogado != null}">
                     <p:column>
                         <p:submenu label="Vendas">
                             <p:menuitem action="#{controleVenda.listar()}"
@@ -41,7 +41,7 @@
                         </p:submenu>                               
                     </p:column>
                 </p:submenu>                
-                <p:submenu label="Relatórios">
+                <p:submenu label="Relatórios" rendered="#{controleLogin.usuarioLogado != null}">
                     <p:column>               
                         <p:submenu label="Básicos">
                             <p:menuitem action="#{controlePais.relatorio()}"
@@ -49,7 +49,21 @@
                                         ajax="false" target="_blank"/>                                     
                         </p:submenu>                                
                     </p:column>
-                </p:submenu>                
+                </p:submenu>    
+                <p:submenu label="Usuário">
+                    <p:column>               
+                        <p:submenu label="Ações">
+                            <p:menuitem value="#{controleLogin.usuarioLogado.nome} : Sair do sistema" 
+                                        rendered="#{controleLogin.usuarioLogado != null}"
+                                        ajax="false"
+                                        action="#{controleLogin.efetuarLogout()}" icon="ui-icon-power" />       
+                            <p:menuitem value="Entrar no sistema" 
+                                                    rendered="#{controleLogin.usuarioLogado == null}"
+                                                    ajax="false"
+                                                    action="#{controleLogin.paginaLogin()}" icon="ui-icon-person" />                             
+                        </p:submenu>                                
+                    </p:column>
+                </p:submenu>                  
             </p:megaMenu>            
         </h:form>
         <ui:insert name="conteudo">
