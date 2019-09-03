@@ -16,7 +16,7 @@
                                  update="formEdicao"
                                  process="@this"
                                  oncomplete="PF('dlg').show();"
-                                 icon="ui-icon-plus"/>
+                                 icon="pi pi-plus"/>
                 <div align="center"> 
                     <p:defaultCommand target="filtrar"/>
                     <p:panelGrid columns="11">
@@ -32,7 +32,7 @@
                             <p:ajax update="listagem" event="blur"/>
                         </p:inputText>                       
                         <p:commandButton value="Filtrar" update="listagem" id="filtrar"
-                                         icon="ui-icon-search"/>
+                                         icon="pi pi-search"/>
                         <p:outputLabel value="Máximo de objetos:"/>
                         <p:inputNumber value="#{controleVenda.dao.maximoObjetos}"
                                        size="3"
@@ -41,16 +41,16 @@
                             <p:ajax event="keyup" update="listagem"/>
                         </p:inputNumber>
                         <p:commandButton actionListener="#{controleVenda.dao.primeiro()}"
-                                         icon="ui-icon-seek-first" title="Primeiro"
+                                         icon="pi pi-step-backward" title="Primeiro"
                                          update="listagem"/>
                         <p:commandButton actionListener="#{controleVenda.dao.anterior()}"
-                                         icon="ui-icon-seek-prev" title="Anterior"
+                                         icon="pi pi-chevron-left" title="Anterior"
                                          update="listagem"/>
                         <p:commandButton actionListener="#{controleVenda.dao.proximo()}"
-                                         icon="ui-icon-seek-next" title="Próximo"
+                                         icon="pi pi-chevron-right" title="Próximo"
                                          update="listagem"/>                        
                         <p:commandButton actionListener="#{controleVenda.dao.ultimo()}"
-                                         icon="ui-icon-seek-end" title="Ultimo"
+                                         icon="pi pi-step-forward" title="Ultimo"
                                          update="listagem"/>                        
                     </p:panelGrid>                        
                 </div>
@@ -79,20 +79,20 @@
                         <div align="center">
                             <p:commandButton
                                 actionListener="#{controleVenda.editar(obj.id)}"
-                                icon="ui-icon-pencil"
+                                icon="pi pi-pencil"
                                 update="formEdicao"
                                 process="@this"
                                 oncomplete="PF('dlg').show();"                                
                                 title="Editar"/>
                             <p:commandButton
                                 actionListener="#{controleVenda.remover(obj.id)}"
-                                icon="ui-icon-trash" 
+                                icon="pi pi-trash" 
                                 process="@this"
                                 update="formListagem"
                                 title="Remover"
                                 onclick="if (!confirm('Confirma a exclusão'))
                                             return false"/>
-                            <p:commandButton icon="ui-icon-print"
+                            <p:commandButton icon="pi pi-print"
                                              action="#{controleVenda.imprimeRelatorio(obj.id)}"
                                              ajax="false" onclick="this.form.target = '_blank';"/>                            
                         </div>
@@ -157,7 +157,7 @@
                                          var="item" rowIndexVar="idxItem" id="listaItens">
                                 <f:facet name="header">
                                     <p:commandButton value="Novo Item"
-                                                     icon="ui-icon-plus"
+                                                     icon="pi pi-plus"
                                                      actionListener="#{controleVenda.novoItem()}"
                                                      update="formItem" process="@this"
                                                      oncomplete="PF('dlgItem').show();"/>
@@ -179,11 +179,11 @@
                                 </p:column>     
                                 <p:column headerText="Ações">
                                     <div align="center">
-                                        <p:commandButton icon="ui-icon-pencil"
+                                        <p:commandButton icon="pi pi-pencil"
                                                          actionListener="#{controleVenda.editarItem(idxItem)}"
                                                          update="formItem" process="@this"
                                                          oncomplete="PF('dlgItem').show();"/>
-                                        <p:commandButton icon="ui-icon-trash"
+                                        <p:commandButton icon="pi pi-trash"
                                                          actionListener="#{controleVenda.removerItem(idxItem)}"
                                                          update="listaItens growl txtValorTotal" process="@this"
                                                          onclick="if (!confirm('Confirma a remoção do item?'))
@@ -201,7 +201,7 @@
                                                          actionListener="#{controleVenda.gerarParcelas()}"
                                                          update="listaparcelas growl"
                                                          process="@form"
-                                                         icon="ui-icon-plus"/>
+                                                         icon="pi pi-plus"/>
                                     </div>
                                 </f:facet>
                                 <p:column headerText="Numero">
@@ -233,7 +233,7 @@
                     <p:panel>
                         <div align="center">
                             <p:commandButton value="Salvar"
-                                             icon="ui-icon-disk"
+                                             icon="pi pi-save"
                                              actionListener="#{controleVenda.salvar()}"
                                              oncomplete="if(!args.validationFailed){PF('dlg').hide();}"
                                              process="@form"
@@ -253,7 +253,7 @@
                             <f:facet name="footer">
                                 <div align="center">
                                     <p:commandButton value="Salvar"
-                                                     icon="ui-icon-disk"
+                                                     icon="pi pi-save"
                                                      actionListener="#{controleVenda.salvarItem()}"
                                                      update="listaItens formItem txtValorTotal"
                                                      process="@form"

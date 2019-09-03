@@ -16,7 +16,7 @@
                                  update="formEdicao"
                                  process="@this"
                                  oncomplete="PF('dlg').show();"
-                                 icon="ui-icon-plus"/>
+                                 icon="pi pi-plus"/>
                 <p:commandButton value="Imprimir"
                                  action="#{controlePessoaFisica.imprimeRelatorioTodasPessoas()}"
                                  ajax="false" onclick="this.form.target = '_blank';"/>
@@ -36,7 +36,7 @@
                             <p:ajax update="listagem" event="blur"/>
                         </p:inputText>                       
                         <p:commandButton value="Filtrar" update="listagem" id="filtrar"
-                                         icon="ui-icon-search"/>
+                                         icon="pi pi-search"/>
                         <p:outputLabel value="Máximo de objetos:"/>
                         <p:inputNumber value="#{controlePessoaFisica.dao.maximoObjetos}"
                                        size="3"
@@ -45,16 +45,16 @@
                             <p:ajax event="keyup" update="listagem"/>
                         </p:inputNumber>
                         <p:commandButton actionListener="#{controlePessoaFisica.dao.primeiro()}"
-                                         icon="ui-icon-seek-first" title="Primeiro"
+                                         icon="pi pi-step-backward" title="Primeiro"
                                          update="listagem"/>
                         <p:commandButton actionListener="#{controlePessoaFisica.dao.anterior()}"
-                                         icon="ui-icon-seek-prev" title="Anterior"
+                                         icon="pi pi-chevron-left" title="Anterior"
                                          update="listagem"/>
                         <p:commandButton actionListener="#{controlePessoaFisica.dao.proximo()}"
-                                         icon="ui-icon-seek-next" title="Próximo"
+                                         icon="pi pi-chevron-right" title="Próximo"
                                          update="listagem"/>                        
                         <p:commandButton actionListener="#{controlePessoaFisica.dao.ultimo()}"
-                                         icon="ui-icon-seek-end" title="Ultimo"
+                                         icon="pi pi-step-forward" title="Ultimo"
                                          update="listagem"/>                        
                     </p:panelGrid>                        
                 </div>
@@ -83,20 +83,20 @@
                         <div align="center">
                             <p:commandButton
                                 actionListener="#{controlePessoaFisica.editar(obj.id)}"
-                                icon="ui-icon-pencil"
+                                icon="pi pi-pencil"
                                 update="formEdicao"
                                 process="@this"
                                 oncomplete="PF('dlg').show();"                                
                                 title="Editar"/>
                             <p:commandButton
                                 actionListener="#{controlePessoaFisica.remover(obj.id)}"
-                                icon="ui-icon-trash" 
+                                icon="pi pi-trash" 
                                 process="@this"
                                 update="formListagem"
                                 title="Remover"
                                 onclick="if (!confirm('Confirma a exclusão'))
                                             return false"/>
-                            <p:commandButton icon="ui-icon-print"
+                            <p:commandButton icon="pi pi-print"
                                              action="#{controlePessoaFisica.imprimeRelatorioPessoa(obj.id)}"
                                              ajax="false" onclick="this.form.target = '_blank';"/>                            
                         </div>
@@ -151,7 +151,7 @@
                                          var="end" rowIndexVar="idxEnd" id="listaEnderecos">
                                 <f:facet name="header">
                                     <p:commandButton value="Novo endereço"
-                                                     icon="ui-icon-plus"
+                                                     icon="pi pi-plus"
                                                      actionListener="#{controlePessoaFisica.novoEndereco()}"
                                                      update="formEndereco" process="@this"
                                                      oncomplete="PF('dlgEndereco').show();"/>
@@ -173,11 +173,11 @@
                                 </p:column>    
                                 <p:column headerText="Ações">
                                     <div align="center">
-                                        <p:commandButton icon="ui-icon-pencil"
+                                        <p:commandButton icon="pi pi-pencil"
                                                          actionListener="#{controlePessoaFisica.editarEndereco(idxEnd)}"
                                                          update="formEndereco" process="@this"
                                                          oncomplete="PF('dlgEndereco').show();"/>
-                                        <p:commandButton icon="ui-icon-trash"
+                                        <p:commandButton icon="pi pi-trash"
                                                          actionListener="#{controlePessoaFisica.removerEndereco(idxEnd)}"
                                                          update="listaEnderecos growl" process="@this"
                                                          onclick="if (!confirm('Confirma a remoção do endereço?'))
@@ -205,7 +205,7 @@
                                                          actionListener="#{controlePessoaFisica.adicionarDesejo()}"
                                                          update="listaDesejos growl"
                                                          process="@this selectProduto"
-                                                         icon="ui-icon-plus"/>
+                                                         icon="pi pi-plus"/>
                                     </p:panelGrid>
                                 </f:facet>
                                 <p:column headerText="Produto">
@@ -220,7 +220,7 @@
                                             actionListener="#{controlePessoaFisica.removerDesejo(idxDes)}"
                                             process="@this"
                                             update="listaDesejos growl"
-                                            icon="ui-icon-trash"/>                                            
+                                            icon="pi pi-trash"/>                                            
                                     </div>
                                 </p:column>          
                             </p:dataTable>
@@ -229,7 +229,7 @@
                     <p:panel>
                         <div align="center">
                             <p:commandButton value="Salvar"
-                                             icon="ui-icon-disk"
+                                             icon="pi pi-save"
                                              actionListener="#{controlePessoaFisica.salvar()}"
                                              oncomplete="if(!args.validationFailed){PF('dlg').hide();}"
                                              process="@form"
@@ -249,7 +249,7 @@
                             <f:facet name="footer">
                                 <div align="center">
                                     <p:commandButton value="Salvar"
-                                                     icon="ui-icon-disk"
+                                                     icon="pi pi-save"
                                                      actionListener="#{controlePessoaFisica.salvarEndereco()}"
                                                      update="listaEnderecos formEndereco"
                                                      process="@form"

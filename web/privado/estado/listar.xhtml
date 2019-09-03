@@ -14,7 +14,7 @@
                 <p:commandButton value="Novo"
                                  action="#{controleEstado.novo()}"
                                  ajax="false"
-                                 icon="ui-icon-plus"/>
+                                 icon="pi pi-plus"/>
                 <div align="center"> 
                     <p:defaultCommand target="filtrar"/>
                     <p:panelGrid columns="11">
@@ -30,7 +30,7 @@
                             <p:ajax update="listagem" event="blur"/>
                         </p:inputText>                       
                         <p:commandButton value="Filtrar" update="listagem" id="filtrar"
-                                         icon="ui-icon-search"/>
+                                         icon="pi pi-search"/>
                         <p:outputLabel value="Máximo de objetos:"/>
                         <p:inputNumber value="#{controleEstado.dao.maximoObjetos}"
                                        size="3"
@@ -39,16 +39,16 @@
                             <p:ajax event="keyup" update="listagem"/>
                         </p:inputNumber>
                         <p:commandButton actionListener="#{controleEstado.dao.primeiro()}"
-                                         icon="ui-icon-seek-first" title="Primeiro"
+                                         icon="pi pi-step-backward" title="Primeiro"
                                          update="listagem"/>
                         <p:commandButton actionListener="#{controleEstado.dao.anterior()}"
-                                         icon="ui-icon-seek-prev" title="Anterior"
+                                         icon="pi pi-chevron-left" title="Anterior"
                                          update="listagem"/>
                         <p:commandButton actionListener="#{controleEstado.dao.proximo()}"
-                                         icon="ui-icon-seek-next" title="Próximo"
+                                         icon="pi pi-chevron-right" title="Próximo"
                                          update="listagem"/>                        
                         <p:commandButton actionListener="#{controleEstado.dao.ultimo()}"
-                                         icon="ui-icon-seek-end" title="Ultimo"
+                                         icon="pi pi-step-forward" title="Ultimo"
                                          update="listagem"/>                        
                     </p:panelGrid>                        
                 </div>
@@ -72,11 +72,11 @@
                         <div align="center">
                             <p:commandButton
                                 action="#{controleEstado.editar(obj.id)}"
-                                icon="ui-icon-pencil" ajax="false"
+                                icon="pi pi-pencil" ajax="false"
                                 title="Editar"/>
                             <p:commandButton
                                 action="#{controleEstado.remover(obj.id)}"
-                                icon="ui-icon-trash" ajax="false"
+                                icon="pi pi-trash" ajax="false"
                                 title="Remover"
                                 onclick="if(!confirm('Confirma a exclusão')) return false"/>
                         </div>

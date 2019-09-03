@@ -12,8 +12,8 @@
     <h:body>
         <h:form id="formMenu" prependId="false">
             <p:megaMenu>
-                <p:menuitem value="Início" url="/index.xhtml"
-                            icon="ui-icon-home"/>
+                <p:menuitem value="Início" url="#{facesContext.externalContext.requestContextPath}/index.xhtml"
+                            icon="pi pi-home"/>
                 <p:submenu label="Cadastros" rendered="#{controleLogin.usuarioLogado != null}">
                     <p:column>
                         <p:submenu label="Básicos">

@@ -27,7 +27,7 @@
                         </p:inputText>    
 
                         <p:commandButton value="Filtrar" update="listagem" id="filtrar"
-                                         icon="ui-icon-search"/>
+                                         icon="pi pi-search"/>
                         <p:outputLabel value="Máximo de objetos:"/>
                         <p:inputNumber value="#{controleParcela.dao.maximoObjetos}"
                                        size="3"
@@ -36,16 +36,16 @@
                             <p:ajax event="keyup" update="listagem"/>
                         </p:inputNumber>
                         <p:commandButton actionListener="#{controleParcela.dao.primeiro()}"
-                                         icon="ui-icon-seek-first" title="Primeiro"
+                                         icon="pi pi-step-backward" title="Primeiro"
                                          update="listagem"/>
                         <p:commandButton actionListener="#{controleParcela.dao.anterior()}"
-                                         icon="ui-icon-seek-prev" title="Anterior"
+                                         icon="pi pi-chevron-left" title="Anterior"
                                          update="listagem"/>
                         <p:commandButton actionListener="#{controleParcela.dao.proximo()}"
-                                         icon="ui-icon-seek-next" title="Próximo"
+                                         icon="pi pi-chevron-right" title="Próximo"
                                          update="listagem"/>                        
                         <p:commandButton actionListener="#{controleParcela.dao.ultimo()}"
-                                         icon="ui-icon-seek-end" title="Ultimo"
+                                         icon="pi pi-step-forward" title="Ultimo"
                                          update="listagem"/>                        
                     </p:panelGrid>     
                     <p:panelGrid columns="6">
